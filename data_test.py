@@ -1,10 +1,12 @@
 import pandas as pd
 import os 
 import json
+import bs4
+from bs4 import BeautifulSoup
 
-file_path = "D:\STUDY\project\get_data\data"
+file_path = r"D:\STUDY\project\get_data\data"
 file_list = os.listdir(file_path)
-save_file = "news_train_dataset.json1"
+save_file = "keywords/news_train_dataset.json1"
 
 result = []
 dedupe_result =[]
@@ -21,7 +23,7 @@ with open(save_file,"w",encoding="utf-8") as out_f:
                 {
                     "category":item["doc_class"]["code"],
                     "title":item["doc_title"],
-                    "content":item["paragraphs"][0]["context"]
+                    "content":item["paragraphs"][0]["context"].replace("\n","")
                 }
             ] )
     
@@ -30,6 +32,7 @@ with open(save_file,"w",encoding="utf-8") as out_f:
         if key not in seen:
             seen.add(key)
             dedupe_result.append(item)
+
 
     out_f.write(json.dumps(dedupe_result,ensure_ascii=False,indent=2))
     # out_f.write(json.dumps(result,ensure_ascii=False,indent=2))
