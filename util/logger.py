@@ -8,5 +8,5 @@ class Logger:
         datefmt='%Y-%m-%d %H:%M:%S',
     )
 
-    def get_lgger(self,name):
+    def get_logger(self,name):
         return logging.getLogger(name)

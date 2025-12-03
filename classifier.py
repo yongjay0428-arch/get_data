@@ -7,7 +7,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
 from sklearn.svm import LinearSVC
-file_path = r"D:\STUDY\project\get_data\keywords\news_train_dataset.json1"
+file_path = r"/data/전처리/news_train_dataset.json1"
 test_file_path = r""
 
 with open(file_path, "r", encoding="utf-8-sig") as f:
@@ -33,7 +33,7 @@ model1 = Pipeline([
 model1.fit(x_train,y_train)
 score = model1.score(x_test,y_test)
 print(f"model1:{score}점")
-joblib.dump(model1, "model1.pkl")
+joblib.dump(model1, "data/model/model1.pkl")
 
 
 
