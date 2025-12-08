@@ -1,5 +1,0 @@
-uvicorn
-fastapi
-beautifulsoup4
-httpx
-starlette

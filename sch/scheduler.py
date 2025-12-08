@@ -1,6 +1,6 @@
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-from dong_A_crawler import search
+from crawler.dong_A_crawler import search
 
 def crawl_start():
     sch = AsyncIOScheduler()

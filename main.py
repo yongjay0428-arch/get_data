@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from scheduler import crawl_start
-from dong_A_crawler import search
+from sch.scheduler import crawl_start
+from crawler.dong_A_crawler import search
 
 app = FastAPI()
 sch = crawl_start()
