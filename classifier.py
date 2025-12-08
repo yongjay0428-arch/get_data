@@ -7,15 +7,19 @@ from sklearn.pipeline import Pipeline
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
 from sklearn.svm import LinearSVC
-file_path = r"/data/전처리/news_train_dataset.json1"
-test_file_path = r""
+from class_test import preprocess
 
-with open(file_path, "r", encoding="utf-8-sig") as f:
-    dataset = pd.read_json(f, lines=True, encoding="utf-8-sig")
+file_path = r"D:\STUDY\project\get_data\data\전처리\news_train_dataset.json1"
 
-    x =  dataset["title"]+" "+dataset["content"]
-    y = dataset["category"]
-    x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.2, random_state=42)
+dataset = pd.read_json(file_path, lines=True, encoding="utf-8-sig")
+dataset.dropna(inplace=True)
+
+dataset["title"] = dataset["title"].apply(preprocess)
+dataset["content"] = dataset["content"].apply(preprocess)
+
+x =  dataset["title"]+" "+dataset["content"]
+y = dataset["category"]
+x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.2, random_state=42)
 
 model1 = Pipeline([
   ('vect',text.TfidfVectorizer(
@@ -33,7 +37,8 @@ model1 = Pipeline([
 model1.fit(x_train,y_train)
 score = model1.score(x_test,y_test)
 print(f"model1:{score}점")
-joblib.dump(model1, "data/model/model1.pkl")
+print("저장시작")
+joblib.dump(model1, "data/model/model_v2.pkl")
 
 
 

@@ -25,13 +25,19 @@ def preprocess(text: str) -> str:
     text = re.sub(r"\s+", " ", text).strip()
     return text
 
-with open(r"D:\STUDY\project\get_data\data\model\model1.pkl", "rb") as f:
-    model1 = joblib.load(f)
+def check_data():
+    with open(r"D:\STUDY\project\get_data\data\model\model_v2.pkl", "rb") as f:
+        model = joblib.load(f)
 
-df = pd.read_csv(file_path, encoding="utf-8-sig")
-new_df = df[df["art_cat"].isin(["정치","경제","국제(세계)","사회","생활/문화","스포츠"])].dropna()
-x = new_df['art_title']+" "+new_df['art_desc'].apply(preprocess)
-y = new_df['art_cat']
+    df = pd.read_csv(file_path, encoding="utf-8-sig")
+    new_df = df[df["art_cat"].isin(["정치","경제","국제(세계)","사회","생활/문화","스포츠"])].dropna()
+    x = new_df['art_title']+" "+new_df['art_desc'].apply(preprocess)
+    y = new_df['art_cat']
+    print(model.score(x,y))
+    return None
 
-print(model1.score(x,y))
+if __name__ == "__main__":
+    check_data()
+
+
 
